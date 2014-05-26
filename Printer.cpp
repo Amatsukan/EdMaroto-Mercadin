@@ -1,43 +1,15 @@
-#include "Supermercado.h"
 #include "Printer.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
 
 using namespace std;
 
-int main(){
-	srand(time(NULL));
+Printer::Printer(Supermercado* _super){
+	super = _super;
+}
 
-	Supermercado* super = new Supermercado();
-	Printer* printer = new Printer(super);
-
-	while(super->temClientes() || super->aberto()){
-		if(super->aberto() && super->getRelogio()%super->getTempoMedioClientes() == 0){
-			Cliente* cliente = new Cliente(super->getRelogio());
-			try{
-				super->colocaNaFila(cliente);
-			}catch(int ex){
-				super->recolheCarrinho(cliente);
-			}
-		}
-
-		Lista<Caixa*>* caixas = super->getCaixas();
-		caixas->resetaIterador();
-		for(int i = 0; i < caixas->getSize(); i++){
-			Caixa* caixa = caixas->get();
-			if(caixa->getClientesNaFila() > 0){
-				caixa->atendeCliente(super->getRelogio());
-			}
-		}
-		caixas->resetaIterador();
-		super->incrementaRelogio();
-	}
-	// cout << difftime(time(0), start) << endl;
-	// printer->print();
-
-	// prints
-
+void Printer::print(){
+	
+	
 	// double lucroTotal = super->computaLucro();
 	// double faturamentoTotal = super->getDinheirosCaixas();
 	// double faturamentoPorCaixa = faturamentoTotal/super->getCaixas()->getSize();
@@ -56,6 +28,4 @@ int main(){
 	// 	cout << "Tempo media de permanencia por cliente: " << super->getRelogio()/caixa->getClientesAtendidos() << endl;
 	// 	printf("\n");
 	// }
-
-	return 0;
 }

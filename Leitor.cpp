@@ -10,7 +10,7 @@
 class Leitor{
 public:
     config* lerConf() {
-            
+
     FILE * pArquivoConfig = fopen(ARQUIVO, "r");
         if (pArquivoConfig == NULL) {
             cout << "Erro ao ler arquivo de configurações." << endl;
@@ -45,6 +45,9 @@ public:
                 c->numeroCaixas = atoi(linha);
                 break;
             default:
+                if(c->caixas == NULL){
+                    c->caixas = new Lista<Caixa*>();
+                }
                 char nomeCaixa[50];
                 int eficiencia;
                 double salario;

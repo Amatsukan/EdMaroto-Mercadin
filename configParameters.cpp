@@ -1,8 +1,9 @@
 #include <string>
 #include <stdio.h>
 #include "Lista.hpp"
-#include "Tempo.cpp"
+#include "Tempo.h"
 #include "Caixa.h"
+
 using namespace std;
 
 class config{

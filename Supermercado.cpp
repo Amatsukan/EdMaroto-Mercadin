@@ -1,5 +1,6 @@
 #include "Supermercado.h"
 #include "Leitor.cpp"
+#include <stdio.h>
 
 Supermercado::Supermercado(){
 	caixas = new Lista<Caixa*>();
