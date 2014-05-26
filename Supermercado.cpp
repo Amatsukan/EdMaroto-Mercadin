@@ -10,6 +10,8 @@ Supermercado::Supermercado(int _horasDeOperacao){
 	dinheirosCaixas = 0;
 	lucroTotal = 0;
 	relogio = 0;
+
+	tempoMedioClientes = 7;
 }
 
 bool Supermercado::temClientes(){
@@ -49,6 +51,7 @@ void Supermercado::colocaNaFila(Cliente* cliente){
 			}
 		}
 	}
+	if(caixa->getClientesNaFila() >= 10) throw(-1);
 	caixa->recebeNovoCliente(cliente);
 }
 
@@ -72,23 +75,37 @@ void Supermercado::incrementaRelogio(){
 
 void Supermercado::adicionaCaixas(){
 	caixas->add(new Caixa("Maria_Benta", 800, 1));
-	// caixas->add(new Caixa("Juliana_Digito", 800, 1));
-	// caixas->add(new Caixa("Zeca_Mole", 180, 3));
-	// caixas->add(new Caixa("Joao_DeMora", 180, 3));
+	caixas->add(new Caixa("Juliana_Digito", 800, 1));
+	caixas->add(new Caixa("Zeca_Mole", 180, 3));
+	caixas->add(new Caixa("Joao_DeMora", 180, 3));
 }
 
 int Supermercado::computaLucro(){
 	int salarios = 0;
-	int dinheiros = 0;
+	dinheirosCaixas = 0;
 	caixas->resetaIterador();
 	for(int i = 0; i < caixas->getSize(); i++){
 		Caixa* caixa = caixas->get();
 		salarios += caixa->getSalario();
-		dinheiros += caixa->getFaturamentoTotal();
+		dinheirosCaixas += caixa->getFaturamentoTotal();
 	}
-	return dinheiros - prejuizo - salarios;
+	return dinheirosCaixas - prejuizo - salarios;
 }
 
 int Supermercado::getDesistencias(){
 	return desistencias;
+}
+
+int Supermercado::getTempoMedioClientes(){
+	return tempoMedioClientes;
+}
+
+int Supermercado::getDinheirosCaixas(){
+	if(dinheirosCaixas == 0){
+		caixas->resetaIterador();
+		for(int i = 0; i < caixas->getSize(); i++){
+			dinheirosCaixas += caixas->get()->getFaturamentoTotal();
+		}
+	}
+	return dinheirosCaixas;
 }

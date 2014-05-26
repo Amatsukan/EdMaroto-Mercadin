@@ -1,13 +1,16 @@
 #include "Supermercado.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
 
 int main(){
 	// srand(time(NULL));
-	Supermercado* super = new Supermercado(8);//ler arquivo
+	Supermercado* super = new Supermercado(5);//ler arquivo
 
 	while(super->temClientes() || super->aberto()){
-		if(super->aberto()){
+		if(super->aberto() && super->getRelogio()%super->getTempoMedioClientes() == 0){
 			Cliente* cliente = new Cliente(super->getRelogio());
 			try{
 				super->colocaNaFila(cliente);
@@ -25,9 +28,28 @@ int main(){
 			}
 		}
 		caixas->resetaIterador();
-		printf("Numero de clientes: %d\n", caixas->get()->getClientesNaFila());
 		super->incrementaRelogio();
 	}
-	printf("Lucro: %d\n", super->computaLucro());
+
+
+	// prints
+
+	double lucroTotal = super->computaLucro();
+	double faturamentoTotal = super->getDinheirosCaixas();
+	double faturamentoPorCaixa = faturamentoTotal/super->getCaixas()->getSize();
+
+
+	printf("Faturamento total: %f\n", faturamentoTotal);
+	printf("Faturamento médio por caixa: %f\n", faturamentoPorCaixa);
+	printf("\n");
+
+	super->getCaixas()->resetaIterador();
+	for(int i = 0; i < super->getCaixas()->getSize(); i++){
+		Caixa* caixa = super->getCaixas()->get();
+		cout << "Faturamento do caixa " << caixa->getId() << ": " << caixa->getFaturamentoTotal() << endl;
+		cout << "Lucro do caixa " << caixa->getId() << ": " << caixa->getFaturamentoTotal()-caixa->getSalario() << endl;
+		printf("\n");
+	}
+
 	return 0;
 }

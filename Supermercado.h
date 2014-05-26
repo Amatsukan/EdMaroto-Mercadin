@@ -18,6 +18,8 @@ public:
 	void adicionaCaixas();
 	int computaLucro();
 	int getDesistencias();
+	int getTempoMedioClientes();
+	int getDinheirosCaixas();
 private:
 	Lista<Caixa*>* caixas;
 	int desistencias;
@@ -26,6 +28,7 @@ private:
 	int lucroTotal;
 	int relogio;
 	int horasDeOperacao;
+	int tempoMedioClientes;
 };
 
 #endif

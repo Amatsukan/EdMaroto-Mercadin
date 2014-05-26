@@ -39,12 +39,12 @@ void Lista<T>::add(T dado){
 
 template <typename T>
 void Lista<T>::resetaIterador(){
-	iterado = primeiro;
+	iterado = ultimo;
 }
 
 template <typename T>
 T Lista<T>::get(){
-	if(!iterado == 0){
+	if(iterado == 0){
 		iterado = primeiro;
 	}else{
 		iterado = iterado->prox;
