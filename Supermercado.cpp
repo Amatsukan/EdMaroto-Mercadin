@@ -1,17 +1,14 @@
 #include "Supermercado.h"
+#include "Leitor.cpp"
 
-Supermercado::Supermercado(int _horasDeOperacao){
+Supermercado::Supermercado(){
 	caixas = new Lista<Caixa*>();
-	adicionaCaixas();
-
-	horasDeOperacao = _horasDeOperacao*60*60;
+	leConf();
 	desistencias = 0;
 	prejuizo = 0;
 	dinheirosCaixas = 0;
 	lucroTotal = 0;
 	relogio = 0;
-
-	tempoMedioClientes = 7;
 }
 
 bool Supermercado::temClientes(){
@@ -73,13 +70,6 @@ void Supermercado::incrementaRelogio(){
 	relogio++;
 }
 
-void Supermercado::adicionaCaixas(){
-	caixas->add(new Caixa("Maria_Benta", 800, 1));
-	caixas->add(new Caixa("Juliana_Digito", 800, 1));
-	caixas->add(new Caixa("Zeca_Mole", 180, 3));
-	caixas->add(new Caixa("Joao_DeMora", 180, 3));
-}
-
 int Supermercado::computaLucro(){
 	int salarios = 0;
 	dinheirosCaixas = 0;
@@ -109,3 +99,25 @@ int Supermercado::getDinheirosCaixas(){
 	}
 	return dinheirosCaixas;
 }
+
+std::string Supermercado::getNome(){
+	return nome;
+}
+
+void Supermercado::leConf(){
+	Leitor* leitor = new Leitor();
+	config* conf = leitor->lerConf();
+	nome = conf->nome;
+	caixas = conf->caixas;
+	horasDeOperacao = conf->jornada->returnInt();
+	tempoMedioClientes = conf->clientAcada->returnInt();
+}
+
+
+
+// void Supermercado::adicionaCaixas(){
+// 	caixas->add(new Caixa("Maria_Benta", 800, 1));
+// 	caixas->add(new Caixa("Juliana_Digito", 800, 1));
+// 	caixas->add(new Caixa("Zeca_Mole", 180, 3));
+// 	caixas->add(new Caixa("Joao_DeMora", 180, 3));
+// }

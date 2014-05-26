@@ -7,7 +7,7 @@ using namespace std;
 
 int main(){
 	// srand(time(NULL));
-	Supermercado* super = new Supermercado(5);//ler arquivo
+	Supermercado* super = new Supermercado();
 
 	while(super->temClientes() || super->aberto()){
 		if(super->aberto() && super->getRelogio()%super->getTempoMedioClientes() == 0){
@@ -46,8 +46,10 @@ int main(){
 	super->getCaixas()->resetaIterador();
 	for(int i = 0; i < super->getCaixas()->getSize(); i++){
 		Caixa* caixa = super->getCaixas()->get();
-		cout << "Faturamento do caixa " << caixa->getId() << ": " << caixa->getFaturamentoTotal() << endl;
-		cout << "Lucro do caixa " << caixa->getId() << ": " << caixa->getFaturamentoTotal()-caixa->getSalario() << endl;
+		cout << "|| " << caixa->getId() << " ||" << endl;
+		cout << "Faturamento total: " << caixa->getFaturamentoTotal() << endl;
+		cout << "Lucro: " << caixa->getFaturamentoTotal()-caixa->getSalario() << endl;
+		cout << "Tempo media de permanencia por cliente: " << super->getRelogio()/caixa->getClientesAtendidos() << endl;
 		printf("\n");
 	}
 

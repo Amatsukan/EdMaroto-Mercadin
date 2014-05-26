@@ -7,20 +7,22 @@
 
 class Supermercado{
 public:
-	Supermercado(int horasDeOperacao);
+	Supermercado();
 	bool temClientes();
 	bool aberto();
 	int getRelogio();
 	void incrementaRelogio();
 	void colocaNaFila(Cliente* cliente);
-	void recolheCarrinho(Cliente* cliente);//desistencias++
+	void recolheCarrinho(Cliente* cliente);
 	Lista<Caixa*>* getCaixas();
-	void adicionaCaixas();
 	int computaLucro();
 	int getDesistencias();
 	int getTempoMedioClientes();
 	int getDinheirosCaixas();
+	void leConf();
+	std::string getNome();
 private:
+	std::string nome;
 	Lista<Caixa*>* caixas;
 	int desistencias;
 	int prejuizo;
