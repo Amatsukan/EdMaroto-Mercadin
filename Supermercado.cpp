@@ -32,8 +32,8 @@ int Supermercado::getRelogio(){
 }
 
 void Supermercado::colocaNaFila(Cliente* cliente){
-	Caixa* caixa = caixas->get();
 	caixas->resetaIterador();
+	Caixa* caixa = caixas->get();
 	if(cliente->getTipoCliente() == 0){
 		for(int i = 1; i < caixas->getSize(); i++){
 			Caixa* caixaAtual = caixas->get();
@@ -80,7 +80,8 @@ int Supermercado::computaLucro(){
 		salarios += caixa->getSalario();
 		dinheirosCaixas += caixa->getFaturamentoTotal();
 	}
-	return dinheirosCaixas - prejuizo - salarios;
+	// return dinheirosCaixas - prejuizo - salarios;
+	return dinheirosCaixas - salarios;
 }
 
 int Supermercado::getDesistencias(){
@@ -114,7 +115,9 @@ void Supermercado::leConf(){
 	tempoMedioClientes = conf->clientAcada->returnInt();
 }
 
-
+int Supermercado::getPrejuizo(){
+	return prejuizo;
+}
 
 // void Supermercado::adicionaCaixas(){
 // 	caixas->add(new Caixa("Maria_Benta", 800, 1));

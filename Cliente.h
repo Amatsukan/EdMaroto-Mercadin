@@ -3,6 +3,8 @@
 
 #include "Pilha.hpp"
 #include "Produto.h"
+#include "Lista.hpp"
+// #include "Caixa.h"
 
 class Cliente{
 public:
@@ -16,6 +18,7 @@ public:
 	int getQtdCompras();
 	int getTipoCliente();
 	void pegaProdutos();
+	// void procuraFila(Lista<Caixa*>* caixas);
 private:
 	int horarioEntrada;
 	int tempoDeEspera;

@@ -19,6 +19,7 @@ public:
 	int getDesistencias();
 	int getTempoMedioClientes();
 	int getDinheirosCaixas();
+	int getPrejuizo();
 	void leConf();
 	std::string getNome();
 private:

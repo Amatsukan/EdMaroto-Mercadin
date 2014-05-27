@@ -47,3 +47,25 @@ void Cliente::pegaProdutos(){
 		produtos->add(new Produto());
 	}
 }
+
+// void Cliente::procuraFila(Lista<Caixa*>* caixas){
+// 	caixas->resetaIterador();
+// 	Caixa* caixa = caixas->get();
+// 	if(getTipoCliente() == 0){
+// 		for(int i = 1; i < caixas->getSize(); i++){
+// 			Caixa* caixaAtual = caixas->get();
+// 			if(caixaAtual->getClientesNaFila() < caixa->getClientesNaFila()){
+// 				caixa = caixaAtual;
+// 			}
+// 		}
+// 	}else{
+// 		for(int i = 1; i < caixas->getSize(); i++){
+// 			Caixa* caixaAtual = caixas->get();
+// 			if(caixaAtual->getClientesNaFila() < caixa->getProdutosNaFila()){
+// 				caixa = caixaAtual;
+// 			}
+// 		}
+// 	}
+// 	if(caixa->getClientesNaFila() >= 10) throw(-1);
+// 	caixa->recebeNovoCliente(this);
+// }

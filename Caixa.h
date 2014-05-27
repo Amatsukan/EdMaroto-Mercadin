@@ -17,6 +17,7 @@ public:
 	int getClientesNaFila();
 	int getProdutosNaFila();
 	int getClientesAtendidos();
+	int getEsperaTotal();
 	double getFaturamentoTotal();
 private:
 	std::string id;
@@ -28,6 +29,7 @@ private:
 	Cliente* clienteAtual;
 	int produtosNaFila;
 	int tempoDaFila;
+	int esperaTotal;
 	int tempoAtual;
 	int clientesAtendidos;
 	double faturamentoTotal;

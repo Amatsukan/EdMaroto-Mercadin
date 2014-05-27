@@ -16,6 +16,7 @@ int main(){
 		if(super->aberto() && super->getRelogio()%super->getTempoMedioClientes() == 0){
 			Cliente* cliente = new Cliente(super->getRelogio());
 			try{
+				// cliente->procuraFila(super);
 				super->colocaNaFila(cliente);
 			}catch(int ex){
 				super->recolheCarrinho(cliente);
@@ -25,6 +26,7 @@ int main(){
 		Lista<Caixa*>* caixas = super->getCaixas();
 		caixas->resetaIterador();
 		for(int i = 0; i < caixas->getSize(); i++){
+		// for(int i = 0; i < super->getCaixas()->getSize(); i++){
 			Caixa* caixa = caixas->get();
 			if(caixa->getClientesNaFila() > 0){
 				caixa->atendeCliente(super->getRelogio());
@@ -34,7 +36,7 @@ int main(){
 		super->incrementaRelogio();
 	}
 	// cout << difftime(time(0), start) << endl;
-	// printer->print();
+	printer->print();
 
 	// prints
 

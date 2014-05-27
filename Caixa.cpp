@@ -10,6 +10,7 @@ Caixa::Caixa(std::string _id, double _salario, int _desempenho){
 	clientesAtendidos = 0;
 	faturamentoMedio = 0;
 	faturamentoTotal = 0;
+	esperaTotal = 0;
 	if(desempenho == 1){
 		tempoItem = 1;
 		tempoCheque = 10;
@@ -49,6 +50,7 @@ void Caixa::atendeCliente(int relogio){
 
 		faturamentoTotal+=valorTotal;
 		clientesAtendidos++;
+		esperaTotal += cliente->getTempoDeEspera();
 	}
 }
 
@@ -82,4 +84,8 @@ int Caixa::getClientesAtendidos(){
 
 double Caixa::getFaturamentoTotal(){
 	return faturamentoTotal;
+}
+
+int Caixa::getEsperaTotal(){
+	return esperaTotal;
 }

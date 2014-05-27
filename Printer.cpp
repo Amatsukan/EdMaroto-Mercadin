@@ -8,7 +8,31 @@ Printer::Printer(Supermercado* _super){
 }
 
 void Printer::print(){
-	
+	super->getCaixas()->resetaIterador();
+	for(int i = 0; i < super->getCaixas()->getSize(); i++){
+		cout << super->getCaixas()->get()->getId() << endl;
+	}
+
+	cout << "Faturamento total: " << super->computaLucro() << endl;
+	cout << "Faturamento médio por caixa: " << super->getDinheirosCaixas()/super->getCaixas()->getSize() << endl;
+
+	super->getCaixas()->resetaIterador();
+	for(int i = 0; i < super->getCaixas()->getSize(); i++){
+		Caixa* caixa = super->getCaixas()->get();
+		cout << "|| " << caixa->getId() << " ||" << endl;
+		cout << "Faturamento total: " << caixa->getFaturamentoTotal() << endl;
+		cout << "Lucro: " << caixa->getFaturamentoTotal()-caixa->getSalario() << endl;
+		int n = 0;
+		if(caixa->getClientesAtendidos() != 0){
+			n = caixa->getEsperaTotal()/caixa->getClientesAtendidos();
+		}
+		cout << "Tempo media de permanencia por cliente: " << n << endl;
+		cout << "" << endl;
+	}
+
+	cout << "Clientes perdidos: " << super->getDesistencias() << endl;
+	cout << "Faturamento perdido: " << super->getPrejuizo() << endl;
+	cout << "Nome do supermercado: " << super->getNome() << endl;
 	
 	// double lucroTotal = super->computaLucro();
 	// double faturamentoTotal = super->getDinheirosCaixas();
