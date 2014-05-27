@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 Produto::Produto(){
-	preco = ((rand() % 9000+100)/(double)100);
+	valor = ((rand() % 9000+100)/(double)100);
 }
 
-double Produto::getPreco(){
-	return preco;
+double Produto::getValor(){
+	return valor;
 }

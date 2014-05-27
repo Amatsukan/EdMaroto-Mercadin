@@ -1,71 +1,65 @@
 #include "Cliente.h"
+#include "Caixa.h"
 #include <stdlib.h>
 
-Cliente::Cliente(int _horarioEntrada){
-	horarioEntrada = _horarioEntrada;
-	produtos = new Pilha<Produto*>();
-	pegaProdutos();
-	cheque = (rand()%100 < 20);
-	qtdCompras = 0;
+Cliente::Cliente(Tempo* entrada){
+	carrinho = new Carrinho();
+	cheque = (rand()%100) < 20;
+	horarioDeChegada = entrada;
 }
 
-void Cliente::addProduto(Produto* produto){
-	produtos->add(produto);
+Cliente::~Cliente(){
+	delete carrinho;
 }
 
-void Cliente::setTempoDeEspera(int tempo){
-	tempoDeEspera = tempo + horarioEntrada;
+int Cliente::getQtdProdutos(){
+	return carrinho->getQtdProdutos();
 }
 
-int Cliente::getTipoCliente(){
-	return tipoCliente;
+double Cliente::getValorTotalDeCompras(){
+	return carrinho->getValorTotalDeCompras();
 }
 
-int Cliente::getTempoDeEspera(){
-	return tempoDeEspera;
+Carrinho* Cliente::getCarrinho(){
+	return carrinho;
 }
 
-int Cliente::getHorarioEntrada(){
-	return horarioEntrada;
-}
-
-Pilha<Produto*>* Cliente::getProdutos(){
-	return produtos;
-}
-
-bool Cliente::pagarComCheque(){
+bool Cliente::pagaComCheque(){
 	return cheque;
 }
 
-int Cliente::getQtdCompras(){
-	return qtdCompras;
+Tempo* Cliente::getHorarioDeChegada(){
+	return horarioDeChegada;
 }
 
-void Cliente::pegaProdutos(){
-	int numProdutos = rand()%100+2;
-	for(int i = 0; i < numProdutos; i++){
-		produtos->add(new Produto());
-	}
+Tempo* Cliente::getPrevisaoDeSaida(){
+	return previsaoDeSaida;
 }
 
-// void Cliente::procuraFila(Lista<Caixa*>* caixas){
+
+
+
+// void ClienteMenorFila::escolheCaixa(Lista<Caixa*>* caixas){
 // 	caixas->resetaIterador();
-// 	Caixa* caixa = caixas->get();
-// 	if(getTipoCliente() == 0){
-// 		for(int i = 1; i < caixas->getSize(); i++){
-// 			Caixa* caixaAtual = caixas->get();
-// 			if(caixaAtual->getClientesNaFila() < caixa->getClientesNaFila()){
-// 				caixa = caixaAtual;
-// 			}
-// 		}
-// 	}else{
-// 		for(int i = 1; i < caixas->getSize(); i++){
-// 			Caixa* caixaAtual = caixas->get();
-// 			if(caixaAtual->getClientesNaFila() < caixa->getProdutosNaFila()){
-// 				caixa = caixaAtual;
-// 			}
+// 	Caixa* caixaIdeal = caixas->get();
+// 	for(int i = 0; i < caixas->getSize(); i++){
+// 		Caixa* caixa = caixas->get();
+// 		if(caixa->getQtdClientesNaFila() < caixaIdeal->getQtdClientesNaFila()){
+// 			caixaIdeal = caixa;
 // 		}
 // 	}
-// 	if(caixa->getClientesNaFila() >= 10) throw(-1);
-// 	caixa->recebeNovoCliente(this);
+// 	caixaIdeal->getFila()->add(this);
+// }
+
+
+// void ClienteMenosProdutos::escolheCaixa(Lista<Caixa*>* caixas){
+// 	caixas->resetaIterador();
+// 	Caixa* caixaIdeal = caixas->get();
+// 	for(int i = 0; i < caixas->getSize(); i++){
+// 		Caixa* caixa = caixas->get();
+// 		if(caixa->getFila()->getNumeroDeProdutos() < caixaIdeal->getFila()->getNumeroDeProdutos()){
+// 			caixaIdeal = caixa;
+// 		}
+// 	}
+// 	caixaIdeal->getFila()->add(this);
 // }

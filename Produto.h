@@ -4,9 +4,9 @@
 class Produto{
 public:
 	Produto();
-	double getPreco();
+	double getValor();
 private:
-	double preco;
+	double valor;
 };
 
 #endif

@@ -1,31 +1,34 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
-#include "Pilha.hpp"
-#include "Produto.h"
+#include "Carrinho.h"
 #include "Lista.hpp"
 // #include "Caixa.h"
+#include "Tempo.h"
 
+class Caixa;
 class Cliente{
 public:
-	Cliente(int _horarioEntrada);
-	void addProduto(Produto* produto);
-	int getHorarioEntrada();
-	void setTempoDeEspera(int tempo);
-	int getTempoDeEspera();
-	Pilha<Produto*>* getProdutos();
-	bool pagarComCheque();
-	int getQtdCompras();
-	int getTipoCliente();
-	void pegaProdutos();
-	// void procuraFila(Lista<Caixa*>* caixas);
+	Cliente(Tempo* tempo);
+	~Cliente();
+	virtual void escolheCaixa(Lista<Caixa*>* caixas);
+	int getQtdProdutos();
+	double getValorTotalDeCompras();
+	Carrinho* getCarrinho();
+	bool pagaComCheque();
+	Tempo* getHorarioDeChegada();
+	Tempo* getPrevisaoDeSaida();
 private:
-	int horarioEntrada;
-	int tempoDeEspera;
-	Pilha<Produto*>* produtos;
+	Carrinho* carrinho;
 	bool cheque;
-	int qtdCompras;
-	int tipoCliente;// 0 = fila com menos clientes, 1 = fila com menos produtos
+	Tempo* horarioDeChegada;
+	Tempo* previsaoDeSaida;
 };
+
+// class ClienteMenorFila : public Cliente{
+// };
+
+// class ClienteMenosProdutos : public Cliente{
+// };
 
 #endif

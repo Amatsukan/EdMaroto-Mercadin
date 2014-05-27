@@ -6,6 +6,7 @@
 template <typename T> class Pilha{
 public:
 	Pilha();
+	~Pilha();
 	void add(T dado);
 	T remove();
 	int getSize();
@@ -18,6 +19,17 @@ private:
 template <typename T>
 Pilha<T>::Pilha(){
 	size = 0;
+}
+
+template <typename T>
+Pilha<T>::~Pilha(){
+	ElementoPilha<T>* elemento = topo;
+	for(int i = 0; elemento->ant != 0; i++){
+		ElementoPilha<T>* aux = elemento;
+		elemento = elemento->ant;
+		delete aux;
+	}
+	delete elemento;
 }
 
 template <typename T>

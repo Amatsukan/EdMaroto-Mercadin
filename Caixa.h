@@ -2,36 +2,30 @@
 #define CAIXA_H
 
 #include <string>
-#include "Fila.hpp"
-#include "Cliente.h"
+#include "Tempo.h"
 
+class FilaDeCaixa;
 class Caixa{
 public:
-	Caixa(std::string _id, double _salario, int _desempenho);
-	void recebeNovoCliente(Cliente* cliente);
-	void atendeCliente(int relogio);
+	Caixa(std::string _id, int _desempenho, double _salario, int maxFila);
+	void atendeCliente();
+	int getQtdClientesNaFila();
 	std::string getId();
-	double getSalario();
 	int getDesempenho();
-	Fila<Cliente*>* getFila();
-	int getClientesNaFila();
-	int getProdutosNaFila();
+	double getSalario();
+	FilaDeCaixa* getFila();
 	int getClientesAtendidos();
-	int getEsperaTotal();
+	Tempo* getMediaEspera();
 	double getFaturamentoTotal();
+	double getFaturamentoMedio();
 private:
 	std::string id;
-	double salario;
 	int desempenho;
-	int tempoCheque;
-	int tempoItem;
-	Fila<Cliente*>* fila;
-	Cliente* clienteAtual;
-	int produtosNaFila;
-	int tempoDaFila;
-	int esperaTotal;
-	int tempoAtual;
+	double salario;
+	int tempoParaCheque;
+	FilaDeCaixa* fila;
 	int clientesAtendidos;
+	Tempo* mediaEspera;
 	double faturamentoTotal;
 	double faturamentoMedio;
 };

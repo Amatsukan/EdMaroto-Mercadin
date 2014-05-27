@@ -1,61 +1,41 @@
 #include "Tempo.h"
 
-int Tempo::gets(){
-    return s;
-} 
-int Tempo::getm(){
-    return m;
-}
-int Tempo::geth(){
-    return h;
+Tempo::Tempo(){
+	segundos = 0;
+	minutos = 0;
+	horas = 0;
 }
 
-void Tempo::addh(int H){
-    h+=H;   
-}
-void Tempo::addm(int M){
-    for(int i = 0; i<=M; i++){
-          if(m==60){
-                    addh(1);
-                    m=0;
-          }
-          m++;
-    }   
-}
-void Tempo::adds(int S){
-    for(int i = 0; i<=S; i++){
-          if(s==60){
-                    addm(1);
-                    s=0;
-          }
-          s++;
-    }
+Tempo::Tempo(int h, int m, int s){
+	segundos = s;
+	minutos = m;
+	horas = h;
 }
 
-int Tempo::returnInt(){
-    return (s)+(m*60)+(h*60*60);   
+void Tempo::tick(){
+	segundos++;
+	if(segundos > 60){
+		minutos++;
+		segundos = segundos % 60;
+	}
+	if(minutos > 60){
+		horas++;
+		minutos = minutos % 60;
+	}
 }
 
-// Tempo::Tempo(){
-// s=0;
-// h=0;
-// m=0;
-// }
-
-Tempo::Tempo(int H){
-s=0;
-h=H;
-m=0;
+int Tempo::getSegundos(){
+	return segundos;
 }
 
-// Tempo::Tempo(int H,int M){
-// s=0;
-// h=H;
-// m=M;
-// }
+int Tempo::getMinutos(){
+	return minutos;
+}
 
-// Tempo::Tempo(int H, int M, int S){
-// s=S;
-// h=H;
-// m=M;
-// }
+int Tempo::getHoras(){
+	return horas;
+}
+
+int Tempo::toInt(){
+	return segundos + 60*minutos + 60*60*horas;
+}
