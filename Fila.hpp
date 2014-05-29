@@ -38,11 +38,12 @@ void Fila<T>::add(T dado){
 template <typename T>
 T Fila<T>::remove(){
 	if(empty()) throw(-1);
-	size--;
-	ElementoFila<T>* elemento = inicio;
-	inicio = inicio->prox;
-	T dado = elemento->getDado();
-	delete elemento;
+	// size--;
+	// ElementoFila<T>* elemento = inicio;
+	// inicio = inicio->prox;
+	// T dado = elemento->getDado();
+	//  delete elemento;
+	T dado = inicio->getDado();
 	return dado;
 }
 

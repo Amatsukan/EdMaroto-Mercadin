@@ -2,14 +2,23 @@
 #include "Caixa.h"
 #include <stdlib.h>
 
-Cliente::Cliente(Tempo* entrada){
+
+int id = 0;
+
+// Cliente::Cliente(Tempo* entrada){
+Cliente::Cliente(int entrada){
 	carrinho = new Carrinho();
 	cheque = (rand()%100) < 20;
 	horarioDeChegada = entrada;
+	id+=1;
 }
 
 Cliente::~Cliente(){
 	delete carrinho;
+}
+
+void Cliente::escolheCaixa(Lista<Caixa*>* caixas){
+
 }
 
 int Cliente::getQtdProdutos(){
@@ -28,38 +37,23 @@ bool Cliente::pagaComCheque(){
 	return cheque;
 }
 
-Tempo* Cliente::getHorarioDeChegada(){
+int Cliente::getHorarioDeChegada(){
 	return horarioDeChegada;
 }
 
-Tempo* Cliente::getPrevisaoDeSaida(){
+int Cliente::getPrevisaoDeSaida(){
 	return previsaoDeSaida;
 }
 
 
+int Cliente::getTempoIndividual(){
+	return tempoIndividual;
+}
 
+void Cliente::setPrevisaoDeSaida(int tempo){
+	previsaoDeSaida = tempo;
+}
 
-// void ClienteMenorFila::escolheCaixa(Lista<Caixa*>* caixas){
-// 	caixas->resetaIterador();
-// 	Caixa* caixaIdeal = caixas->get();
-// 	for(int i = 0; i < caixas->getSize(); i++){
-// 		Caixa* caixa = caixas->get();
-// 		if(caixa->getQtdClientesNaFila() < caixaIdeal->getQtdClientesNaFila()){
-// 			caixaIdeal = caixa;
-// 		}
-// 	}
-// 	caixaIdeal->getFila()->add(this);
-// }
-
-
-// void ClienteMenosProdutos::escolheCaixa(Lista<Caixa*>* caixas){
-// 	caixas->resetaIterador();
-// 	Caixa* caixaIdeal = caixas->get();
-// 	for(int i = 0; i < caixas->getSize(); i++){
-// 		Caixa* caixa = caixas->get();
-// 		if(caixa->getFila()->getNumeroDeProdutos() < caixaIdeal->getFila()->getNumeroDeProdutos()){
-// 			caixaIdeal = caixa;
-// 		}
-// 	}
-// 	caixaIdeal->getFila()->add(this);
-// }
+int Cliente::getId(){
+	return id;
+}

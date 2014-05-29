@@ -9,25 +9,39 @@ Caixa::Caixa(std::string _id, int _desempenho, double _salario, int maxFila){
 	switch(desempenho){
 		case 1:
 			tempoParaCheque = 10;
+			tempoParaItens = 1;
 			break;
 		case 2:
 			tempoParaCheque = 25;
+			tempoParaItens = 2;
 			break;
 		default:
 			tempoParaCheque = 60;
+			tempoParaItens = 4;
 			break;
 	}
 	fila = new FilaDeCaixa(maxFila);
 	clientesAtendidos = 0;
-	mediaEspera = new Tempo();
+	mediaEspera = 0;
 	faturamentoTotal = 0;
 	faturamentoMedio = 0;
 }
 
-void Caixa::atendeCliente(){
+Cliente* Caixa::atendeCliente(){
 	Cliente* cliente = fila->remove();
 	faturamentoTotal += cliente->getValorTotalDeCompras();
 	clientesAtendidos++;
+	clientesNaFila--;
+	fila->setTempoDeEspera(fila->getTempoDeEspera() - (cliente->getQtdProdutos()*tempoParaItens + tempoParaCheque));
+	return cliente;
+}
+
+int Caixa::calculaTempoParaCliente(Cliente* cliente){
+	int tempo = cliente->getQtdProdutos()*tempoParaItens;
+	if(cliente->pagaComCheque()){
+		tempo += tempoParaCheque;
+	}
+	return tempo;
 }
 
 int Caixa::getQtdClientesNaFila(){
@@ -54,7 +68,7 @@ int Caixa::getClientesAtendidos(){
 	return clientesAtendidos;
 }
 
-Tempo* Caixa::getMediaEspera(){
+int Caixa::getMediaEspera(){
 	return mediaEspera;
 }
 
@@ -64,4 +78,12 @@ double Caixa::getFaturamentoTotal(){
 
 double Caixa::getFaturamentoMedio(){
 	return faturamentoMedio;
+}
+
+int Caixa::getTempoParaCheque(){
+	return tempoParaCheque;
+}
+
+int Caixa::getTempoParaItens(){
+	return tempoParaItens;
 }

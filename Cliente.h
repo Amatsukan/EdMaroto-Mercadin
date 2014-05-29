@@ -3,32 +3,29 @@
 
 #include "Carrinho.h"
 #include "Lista.hpp"
-// #include "Caixa.h"
-#include "Tempo.h"
 
 class Caixa;
 class Cliente{
 public:
-	Cliente(Tempo* tempo);
+	Cliente(int tempo);
 	~Cliente();
 	virtual void escolheCaixa(Lista<Caixa*>* caixas);
 	int getQtdProdutos();
 	double getValorTotalDeCompras();
 	Carrinho* getCarrinho();
 	bool pagaComCheque();
-	Tempo* getHorarioDeChegada();
-	Tempo* getPrevisaoDeSaida();
+	int getHorarioDeChegada();
+	int getPrevisaoDeSaida();
+	int getTempoIndividual();
+	void setPrevisaoDeSaida(int tempo);
+	int getId();
 private:
 	Carrinho* carrinho;
 	bool cheque;
-	Tempo* horarioDeChegada;
-	Tempo* previsaoDeSaida;
+	int horarioDeChegada;
+	int previsaoDeSaida;
+protected:
+	int tempoIndividual;
 };
-
-// class ClienteMenorFila : public Cliente{
-// };
-
-// class ClienteMenosProdutos : public Cliente{
-// };
 
 #endif
